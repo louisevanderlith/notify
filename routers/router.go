@@ -1,19 +1,17 @@
 package routers
 
 import (
-	"fmt"
-	"strings"
-
-	"github.com/louisevanderlith/mango"
-
-	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/plugins/cors"
-	"github.com/louisevanderlith/mango/control"
-	secure "github.com/louisevanderlith/secure/core"
-	"github.com/louisevanderlith/secure/core/roletype"
+	"github.com/louisevanderlith/droxolite"
 )
 
-func Setup(s *mango.Service, host string) {
+func Setup(poxy *droxolite.Epoxy) {
+	//History
+	/*histCtrl := &controllers.HistoryController{}
+	histGroup := droxolite.NewRouteGroup("history", histCtrl)
+	histGroup.AddRoute("/", "POST", roletype.Owner, histCtrl.Post)
+	histGroup.AddRoute("/{vehicleKey:[0-9]+\x60[0-9]+}", "GET", roletype.User, histCtrl.GetByVehicle)
+	poxy.AddGroup(histGroup)*/
+
 	//ctrlmap := EnableFilters(s, host)
 
 	/*profCtrl := controllers.NewProfileCtrl(ctrlmap)
@@ -27,6 +25,7 @@ func Setup(s *mango.Service, host string) {
 	*/
 }
 
+/*
 func EnableFilters(s *mango.Service, host string) *control.ControllerMap {
 	ctrlmap := control.CreateControlMap(s)
 
@@ -45,4 +44,4 @@ func EnableFilters(s *mango.Service, host string) *control.ControllerMap {
 	}), false)
 
 	return ctrlmap
-}
+}*/
