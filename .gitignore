@@ -13,4 +13,5 @@
 
 notify
 
-db/
+db/*.husk
+!db/*.seed.json
