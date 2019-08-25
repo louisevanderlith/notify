@@ -5,30 +5,27 @@ import (
 	"net/http"
 
 	webpush "github.com/SherClockHolmes/webpush-go"
-	"github.com/louisevanderlith/droxolite/xontrols"
+	"github.com/louisevanderlith/droxolite/context"
 	"github.com/louisevanderlith/notify/core"
 )
 
 type Subscribe struct {
-	xontrols.APICtrl
 }
 
-func (req *Subscribe) Post() {
+func (req *Subscribe) Post(ctx context.Contexer) (int, interface{}) {
 	subsc := webpush.Subscription{}
-	err := req.Body(&subsc)
+	err := ctx.Body(&subsc)
 
 	if err != nil {
-		req.Serve(http.StatusBadRequest, err, nil)
-		return
+		return http.StatusBadRequest, err
 	}
 
 	err = core.AddSubscriber(subsc)
 
 	if err != nil {
 		log.Println(err)
-		req.Serve(http.StatusInternalServerError, err, nil)
-		return
+		return http.StatusInternalServerError, err
 	}
 
-	req.Serve(http.StatusOK, nil, "Subscibed")
+	return http.StatusOK, "Subscibed"
 }

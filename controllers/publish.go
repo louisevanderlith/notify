@@ -1,13 +1,14 @@
 package controllers
 
 import (
-	"github.com/louisevanderlith/droxolite/xontrols"
+	"net/http"
+
+	"github.com/louisevanderlith/droxolite/context"
 )
 
 type Publish struct {
-	xontrols.APIController
 }
 
-func (req *Publish) Post() {
-
+func (req *Publish) Post(ctx context.Contexer) (int, interface{}) {
+	return http.StatusNotImplemented, nil
 }
