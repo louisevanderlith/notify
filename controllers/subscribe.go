@@ -12,7 +12,11 @@ import (
 type Subscribe struct {
 }
 
-func (req *Subscribe) Post(ctx context.Contexer) (int, interface{}) {
+func (req *Subscribe) Get(ctx context.Requester) (int, interface{}) {
+	return http.StatusMethodNotAllowed, nil
+}
+
+func (req *Subscribe) Create(ctx context.Requester) (int, interface{}) {
 	subsc := webpush.Subscription{}
 	err := ctx.Body(&subsc)
 

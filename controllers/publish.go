@@ -9,6 +9,10 @@ import (
 type Publish struct {
 }
 
-func (req *Publish) Post(ctx context.Contexer) (int, interface{}) {
+func (req *Publish) Get(ctx context.Requester) (int, interface{}) {
+	return http.StatusNotImplemented, nil
+}
+
+func (req *Publish) Create(ctx context.Requester) (int, interface{}) {
 	return http.StatusNotImplemented, nil
 }
