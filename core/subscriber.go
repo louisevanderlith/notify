@@ -10,7 +10,7 @@ type Subscriber struct {
 	State        string
 }
 
-func (s Subscriber) Valid() (bool, error) {
+func (s Subscriber) Valid() error {
 	return husk.ValidateStruct(&s)
 }
 

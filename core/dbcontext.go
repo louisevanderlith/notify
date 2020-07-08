@@ -13,7 +13,7 @@ var ctx context
 func CreateContext() {
 
 	ctx = context{
-		Subscribers: husk.NewTable(new(Subscriber)),
+		Subscribers: husk.NewTable(Subscriber{}),
 	}
 }
 

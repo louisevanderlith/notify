@@ -1,14 +1,11 @@
-package routers
+package handles
 
 import (
-	"github.com/louisevanderlith/droxolite/mix"
-	"github.com/louisevanderlith/droxolite/resins"
-	"github.com/louisevanderlith/droxolite/roletype"
-	"github.com/louisevanderlith/notify/controllers"
+	"github.com/gorilla/mux"
+	"net/http"
 )
 
-func Setup(e resins.Epoxi) {
-	e.JoinBundle("/", roletype.User, mix.JSON, &controllers.Subscribe{}, &controllers.Publish{})
+func SetupRoutes() http.Handler {
 	//Subscribe
 	/*subCtrl := &controllers.Subscribe{}
 	subGroup := routing.NewRouteGroup("subscribe", mix.JSON)
@@ -20,4 +17,5 @@ func Setup(e resins.Epoxi) {
 	pubGroup := routing.NewRouteGroup("publish", mix.JSON)
 	pubGroup.AddRoute("Publish", "", "POST", roletype.User, pubCtrl.Post)
 	e.AddBundle(pubGroup)*/
+	return mux.NewRouter()
 }
