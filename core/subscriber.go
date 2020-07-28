@@ -11,7 +11,7 @@ type Subscriber struct {
 }
 
 func (s Subscriber) Valid() error {
-	return husk.ValidateStruct(&s)
+	return husk.ValidateStruct(s)
 }
 
 func AddSubscriber(subsc webpush.Subscription) error {
