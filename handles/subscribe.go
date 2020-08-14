@@ -1,35 +1,42 @@
 package handles
 
 import (
+	"github.com/louisevanderlith/droxolite/drx"
+	"github.com/louisevanderlith/droxolite/mix"
 	"log"
 	"net/http"
 
 	webpush "github.com/SherClockHolmes/webpush-go"
-	"github.com/louisevanderlith/droxolite/context"
 	"github.com/louisevanderlith/notify/core"
 )
 
-type Subscribe struct {
-}
+/*
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+}*/
 
-func (req *Subscribe) Get(ctx context.Requester) (int, interface{}) {
-	return http.StatusMethodNotAllowed, nil
-}
-
-func (req *Subscribe) Create(ctx context.Requester) (int, interface{}) {
+func Subscribe(w http.ResponseWriter, r *http.Request) {
 	subsc := webpush.Subscription{}
-	err := ctx.Body(&subsc)
+	err := drx.JSONBody(r, &subsc)
 
 	if err != nil {
-		return http.StatusBadRequest, err
+		log.Println("Bind Error", err)
+		http.Error(w, "", http.StatusBadRequest)
+		return
 	}
 
 	err = core.AddSubscriber(subsc)
 
 	if err != nil {
-		log.Println(err)
-		return http.StatusInternalServerError, err
+		log.Println("Add Subscriber Error", err)
+		http.Error(w, "", http.StatusInternalServerError)
+		return
 	}
 
-	return http.StatusOK, "Subscibed"
+	err = mix.Write(w, mix.JSON("Subscribed"))
+
+	if err != nil {
+		log.Println("Serve Error", err)
+	}
 }

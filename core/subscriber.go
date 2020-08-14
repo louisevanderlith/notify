@@ -15,17 +15,16 @@ func (s Subscriber) Valid() error {
 }
 
 func AddSubscriber(subsc webpush.Subscription) error {
-	defer ctx.Subscribers.Save()
-
 	item := Subscriber{
 		Subscription: subsc,
 		State:        "ACTIVE",
 	}
-	set := ctx.Subscribers.Create(item)
 
-	if set.Error != nil {
-		return set.Error
+	_, err := ctx.Subscribers.Create(item)
+
+	if err != nil {
+		return err
 	}
 
-	return nil
+	return ctx.Subscribers.Save()
 }

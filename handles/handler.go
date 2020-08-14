@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func SetupRoutes() http.Handler {
+func SetupRoutes(secret, securityUrl string) http.Handler {
 	//Subscribe
 	/*subCtrl := &controllers.Subscribe{}
 	subGroup := routing.NewRouteGroup("subscribe", mix.JSON)
