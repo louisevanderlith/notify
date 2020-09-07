@@ -2,7 +2,7 @@ package core
 
 import (
 	webpush "github.com/SherClockHolmes/webpush-go"
-	"github.com/louisevanderlith/husk"
+	"github.com/louisevanderlith/husk/validation"
 )
 
 type Subscriber struct {
@@ -11,7 +11,7 @@ type Subscriber struct {
 }
 
 func (s Subscriber) Valid() error {
-	return husk.ValidateStruct(s)
+	return validation.Struct(s)
 }
 
 func AddSubscriber(subsc webpush.Subscription) error {
